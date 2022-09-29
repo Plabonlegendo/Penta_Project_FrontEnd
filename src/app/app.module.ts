@@ -15,8 +15,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 /* Angular Flex Layout */
 import { FlexLayoutModule } from "@angular/flex-layout";
+import { StoreModule } from '@ngrx/store';
 
-
+/*Store Component*/
+import { applicationFeatureKey, applicationReducer } from './store/reducers/app-reducers';
+import { appEffects } from './store/effects/app-effects';
+import { EffectsModule } from '@ngrx/effects';
+import { HttpClientModule } from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -31,7 +36,14 @@ import { FlexLayoutModule } from "@angular/flex-layout";
     AngularMaterialModule,
     ReactiveFormsModule,
     FormsModule,
-    FlexLayoutModule
+    FlexLayoutModule,
+    HttpClientModule,
+    StoreModule.forRoot({},{}),
+    StoreModule.forFeature(applicationFeatureKey, applicationReducer),
+    EffectsModule.forRoot([]),
+    EffectsModule.forFeature([
+      appEffects
+    ]),
   ],
   providers: [],
   bootstrap: [AppComponent],
