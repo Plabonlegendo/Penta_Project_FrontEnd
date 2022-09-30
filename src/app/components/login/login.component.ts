@@ -1,8 +1,10 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { Store } from '@ngrx/store';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
+import { SnackBarService } from 'src/app/services/notification-service';
 import * as appActions from 'src/app/store/actions/app-actions';
+import { getIsLoginSuccessful, getLoginSuccessObj } from 'src/app/store/selectors/app-selectors';
 
 
 @Component({
@@ -12,14 +14,15 @@ import * as appActions from 'src/app/store/actions/app-actions';
 })
 export class LoginComponent implements OnInit {
   formLogin: FormGroup;
+  loginSuccessObj: any;
 
-  constructor(private fb: FormBuilder, private store: Store) { }
+  constructor(private fb: FormBuilder, private store: Store, private notificationService: SnackBarService) { }
 
   ngOnInit(): void {
     this.formLogin = this.fb.group({
       email: ["",
         [
-          RxwebValidators.required({message: 'Email is Required' }),
+          RxwebValidators.required({ message: 'Email is Required' }),
           RxwebValidators.email({ message: "Email format is Incorrect"})
         ]     
       ],
@@ -32,8 +35,27 @@ export class LoginComponent implements OnInit {
     return this.formLogin.controls;
   }
 
+  @ViewChild('form') form;
+  reset() {
+    this.form.resetForm();
+  }
+
   login() {
-    console.log(this.formLogin.value);
     this.store.dispatch(appActions.SaveLoginRequest({ loginRequestObj: this.formLogin.value }));
+    this.store.select(getLoginSuccessObj).subscribe(data => {
+      this.loginSuccessObj = data;
+    });
+
+    this.store.select(getIsLoginSuccessful).subscribe(data => {
+        if(data.isDataLoading == false){
+          if(data.isLoginSuccessful == true){
+            this.reset();
+            this.notificationService.displayNotification("Login Successful", "dismiss");
+          }else{
+            this.notificationService.displayNotification("Login Unsuccessful", "dismiss");
+          }
+        }
+    })
+
   }
 }

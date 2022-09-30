@@ -4,7 +4,7 @@
         <mat-card-title>Log in</mat-card-title>
       </mat-card-header>
   
-      <form [formGroup]="formLogin" class="example-form">
+      <form #form="ngForm" [formGroup]="formLogin" class="example-form">
         <mat-card-content>
           <mat-form-field class="example-full-width">
             <input matInput placeholder="User Email" formControlName="email">
@@ -20,7 +20,7 @@
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password" formControlName="password">
+            <input matInput type="password" placeholder="Password" formControlName="password">
             <small
                 *ngIf="formControl.password.touched && formControl.password.dirty && formControl.password.errors" class="p-error">
                 <div translate *ngIf="formControl.password.errors.required">

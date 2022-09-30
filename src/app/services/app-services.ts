@@ -15,4 +15,8 @@ export class AppService {
     loginPerson(loginObj: any): Observable<RequestResponse> {
         return this.http.post<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "auth/signin/person", loginObj);
     }
+
+    registerPerson(registerObj: any): Observable<RequestResponse> {
+        return this.http.post<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "auth/signup/person", registerObj);
+    }
 }

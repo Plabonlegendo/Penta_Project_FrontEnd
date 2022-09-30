@@ -19,5 +19,17 @@ export class appEffects {
                 )
             )
         )
+    );
+
+    SaveRegister$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(appActions.SaveRegisterRequest),
+        exhaustMap(({ registerRequestObj }) =>
+            this.appService.registerPerson(registerRequestObj).pipe(
+                map((requestResponse) => appActions.SaveRegisterSuccess({ requestResponse })),
+                catchError((error) => of(appActions.SaveRegisterFailed({ error })))
+            )
+        )
     )
+);
 }

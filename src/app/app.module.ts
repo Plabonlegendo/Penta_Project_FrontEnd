@@ -23,6 +23,10 @@ import { appEffects } from './store/effects/app-effects';
 import { EffectsModule } from '@ngrx/effects';
 import { HttpClientModule } from '@angular/common/http';
 
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -38,6 +42,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     FlexLayoutModule,
     HttpClientModule,
+    MatSnackBarModule,
     StoreModule.forRoot({},{}),
     StoreModule.forFeature(applicationFeatureKey, applicationReducer),
     EffectsModule.forRoot([]),

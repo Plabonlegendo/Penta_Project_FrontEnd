@@ -4,44 +4,110 @@
         <mat-card-title>Register</mat-card-title>
       </mat-card-header>
   
-      <form class="example-form">
+      <form #form="ngForm" [formGroup]="formRegister" class="example-form">
   
         <mat-card-content>
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Username">
+            <input matInput placeholder="Username" formControlName="username">
+            <small
+                *ngIf="formControl.username.touched && formControl.username.dirty && formControl.username.errors" class="p-error">
+                <div translate *ngIf="formControl.username.errors.required">
+                    {{formControl.username.errors.required.message}}
+                </div>
+            </small>
           </mat-form-field>
   
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Email">
+            <input matInput placeholder="Email" formControlName="email">
+            <small 
+                *ngIf="formControl.email.touched && formControl.email.dirty && formControl.email.errors"
+                class="p-error">
+                <div translate *ngIf="formControl.email.errors.required">
+                    {{formControl.email.errors.required.message}}
+                </div>
+                <div translate *ngIf="formControl.email.errors.email">
+                    {{formControl.email.errors.email.message}}
+                </div>
+            </small>
           </mat-form-field>
           
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Phone">
+            <input matInput placeholder="Phone" formControlName="phoneNo">
+            <small
+                *ngIf="formControl.phoneNo.touched && formControl.phoneNo.dirty && formControl.phoneNo.errors"
+                class="p-error">
+                <div *ngIf="formControl.phoneNo.errors.required">
+                    {{formControl.phoneNo.errors.required.message}}
+                </div>
+                <div *ngIf="formControl.phoneNo.errors">
+                    {{formControl.phoneNo.errors.onlyDigit.message}}
+                </div>
+            </small>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Department Name">
+            <mat-label>Choose a Department...</mat-label>
+            <mat-select formControlName="departmentName">
+                <mat-option [value]="department" *ngFor="let department of Departments">
+                    {{department}}
+                </mat-option>
+            </mat-select>
+            <small
+                *ngIf="formControl.departmentName.touched && formControl.departmentName.dirty && formControl.departmentName.errors"
+                class="p-error">
+                <div *ngIf="formControl.departmentName.errors.required">
+                    {{formControl.departmentName.errors.required.message}}
+                </div>
+            </small>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Password">
+            <input matInput placeholder="Password" type="password" formControlName="password">
+            <small 
+                *ngIf="formControl.password.touched && formControl.password.dirty && formControl.password.errors" 
+                class="p-error">
+                <div translate *ngIf="formControl.password.errors.required">
+                    {{formControl.password.errors.required.message}}
+                </div>
+                <div translate *ngIf="formControl.password.errors.minLength">
+                    {{formControl.password.errors.minLength.message}}
+                </div>
+            </small>
           </mat-form-field>
 
           <mat-form-field class="example-full-width">
-            <input matInput placeholder="Confirm Password">
-          </mat-form-field>
+            <input matInput type="password" placeholder="Confirm Password" formControlName="confirmPassword">
+            <small 
+                *ngIf="formControl.confirmPassword.touched && formControl.confirmPassword.dirty && formControl.confirmPassword.errors"
+                class="p-error">
+                <div translate *ngIf="formControl.confirmPassword.errors.required">
+                    {{formControl.confirmPassword.errors.required.message}}
+                </div>
+                <div translate *ngIf="formControl.confirmPassword.errors.compare">
+                    {{formControl.confirmPassword.errors.compare.message}}
+                </div>
+            </small>
+        </mat-form-field>
   
           <mat-form-field class="example-full-width">
             <mat-label>Choose a role...</mat-label>
-            <mat-select>
-              <mat-option [value]="roles" *ngFor="let roles of Roles">{{roles}}
+            <mat-select formControlName="role">
+              <mat-option [value]="roles" *ngFor="let roles of Roles">
+                {{roles}}
               </mat-option>
             </mat-select>
+            <small
+                *ngIf="formControl.role.touched && formControl.role.dirty && formControl.role.errors"
+                class="p-error">
+                <div *ngIf="formControl.role.errors.required">
+                    {{formControl.role.errors.required.message}}
+                </div>
+            </small>
           </mat-form-field>
   
         </mat-card-content>
   
-        <button mat-stroked-button color="accent" class="btn-block">Register</button>
+        <button mat-stroked-button color="accent" class="btn-block" (click)="register()" [disabled]="!formRegister.valid">Register</button>
   
       </form>
     </mat-card>

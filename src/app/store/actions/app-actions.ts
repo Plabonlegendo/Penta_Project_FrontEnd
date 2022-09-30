@@ -6,3 +6,8 @@ export const SaveLoginRequest = createAction("SUA-SaveLoginRequest", props<{ log
 export const SaveLoginSuccess = createAction("SUA-SaveLoginSuccess", props<{ requestResponse: RequestResponse }>());
 export const SaveLoginFailed = createAction("SUA-SaveLoginFailed", props<{ error: any }>());
 
+export const SaveRegisterRequest = createAction("SUA-SaveRegisterRequest", props<{ registerRequestObj: any }>());
+export const SaveRegisterSuccess = createAction("SUA-SaveRegisterSuccess", props<{ requestResponse: RequestResponse }>());
+export const SaveRegisterFailed = createAction("SUA-SaveRegisterFailed", props<{ error: any }>());
+
+
