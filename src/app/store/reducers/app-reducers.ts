@@ -1,5 +1,6 @@
-import { createReducer, on } from "@ngrx/store";
+import { createReducer, on, State } from "@ngrx/store";
 import { BaseData } from "src/app/helpers/base-data";
+import { PersonDto } from "src/app/models/app-dto";
 import * as appActions from 'src/app/store/actions/app-actions';
 
 export const applicationFeatureKey = "applicationFeatureKey";
@@ -14,7 +15,9 @@ export interface applicationState {
     isRegisterDataLoading: boolean,
     isRegisterSuccessful: boolean,
     registerSuccessObj: any,
-    isLoginDataLoading: boolean
+    isLoginDataLoading: boolean,
+    isAdminPersonListLoading: boolean,
+    AdminPersonList: PersonDto[],
 }
 
 export const initialApplicationState: applicationState = {
@@ -24,6 +27,8 @@ export const initialApplicationState: applicationState = {
     registerSuccessObj: null,
     isRegisterDataLoading: false,
     isLoginDataLoading: false,
+    isAdminPersonListLoading: false,
+    AdminPersonList: [],
 }
 
 export const applicationReducer = createReducer(
@@ -75,6 +80,23 @@ export const applicationReducer = createReducer(
         ...state,
         isRegisterDataLoading: false,
         isRegisterSuccessful: false
+    })),
+
+    //Admin Person List Get
+    on(appActions.GetPersonListForAdminRequest, (state) => ({
+        ...state,
+        isAdminPersonListLoading: true
+    })),
+
+    on(appActions.GetPersonListForAdminSuccess, (state, { requestResponse }) => ({
+        ...state,
+        isAdminPersonListLoading: false,
+        AdminPersonList: requestResponse.data
+    })),
+
+    on(appActions.GetPersonListForAdminFailed, (state, { error }) => ({
+        ...state,
+        isAdminPersonListLoading: false
     })),
 
 

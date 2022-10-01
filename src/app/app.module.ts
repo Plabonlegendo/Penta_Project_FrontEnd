@@ -21,9 +21,12 @@ import { StoreModule } from '@ngrx/store';
 import { applicationFeatureKey, applicationReducer } from './store/reducers/app-reducers';
 import { appEffects } from './store/effects/app-effects';
 import { EffectsModule } from '@ngrx/effects';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import { AdminPageComponent } from './components/admin/admin-page/admin-page.component';
+import { AdminPersonsListComponent } from './components/admin/admin-persons-list/admin-persons-list.component';
+import { HttpRequestInterceptor } from './helpers/http-interceptor';
 
 
 
@@ -31,7 +34,9 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
   declarations: [
     AppComponent,
     LoginComponent,
-    RegisterComponent
+    RegisterComponent,
+    AdminPageComponent,
+    AdminPersonsListComponent
   ],
   imports: [
     BrowserModule,

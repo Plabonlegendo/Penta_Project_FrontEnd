@@ -25,3 +25,8 @@ export const getIsRegisterSuccessful = createSelector(
         isRegisterSuccessful: state.isRegisterSuccessful
     })
 );
+
+export const getPersonListForAdmin = createSelector(
+    selectAppState,
+    (state) => state.AdminPersonList
+);

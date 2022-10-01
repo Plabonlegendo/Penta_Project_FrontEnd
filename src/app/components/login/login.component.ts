@@ -1,5 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
+import { Router } from '@angular/router';
 import { Store } from '@ngrx/store';
 import { RxwebValidators } from '@rxweb/reactive-form-validators';
 import { SnackBarService } from 'src/app/services/notification-service';
@@ -16,7 +17,7 @@ export class LoginComponent implements OnInit {
   formLogin: FormGroup;
   loginSuccessObj: any;
 
-  constructor(private fb: FormBuilder, private store: Store, private notificationService: SnackBarService) { }
+  constructor(private fb: FormBuilder, private store: Store, private notificationService: SnackBarService, private router: Router) { }
 
   ngOnInit(): void {
     this.formLogin = this.fb.group({
@@ -43,7 +44,11 @@ export class LoginComponent implements OnInit {
   login() {
     this.store.dispatch(appActions.SaveLoginRequest({ loginRequestObj: this.formLogin.value }));
     this.store.select(getLoginSuccessObj).subscribe(data => {
-      this.loginSuccessObj = data;
+      if(data){
+        this.loginSuccessObj = data;
+        console.log(this.loginSuccessObj);
+        this.goToDashboardPage(this.loginSuccessObj.roles);    
+      }
     });
 
     this.store.select(getIsLoginSuccessful).subscribe(data => {
@@ -57,5 +62,11 @@ export class LoginComponent implements OnInit {
         }
     })
 
+  }
+
+  goToDashboardPage(role: string){
+    console.log(role);
+    if(role == 'Admin')
+      this.router.navigate(['\admin']);
   }
 }

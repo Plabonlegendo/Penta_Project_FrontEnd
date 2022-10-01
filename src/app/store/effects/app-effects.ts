@@ -1,6 +1,6 @@
 import { Injectable } from "@angular/core";
 import { Actions, createEffect, ofType } from "@ngrx/effects";
-import { catchError, exhaustMap, map, of } from "rxjs";
+import { catchError, exhaustMap, map, mergeMap, of } from "rxjs";
 import { AppService } from "src/app/services/app-services";
 import * as appActions from "src/app/store/actions/app-actions";
 
@@ -28,8 +28,20 @@ export class appEffects {
             this.appService.registerPerson(registerRequestObj).pipe(
                 map((requestResponse) => appActions.SaveRegisterSuccess({ requestResponse })),
                 catchError((error) => of(appActions.SaveRegisterFailed({ error })))
+                )
             )
         )
+    );
+
+    GetPersonList$ = createEffect(() => 
+        this.actions$.pipe(
+            ofType(appActions.GetPersonListForAdminRequest),
+            mergeMap(({  }) =>
+                this.appService.getPersonListForAdmin().pipe(
+                    map((requestResponse) => appActions.GetPersonListForAdminSuccess({ requestResponse })),
+                    catchError((error) => of(appActions.GetPersonListForAdminFailed({ error })))
+                    )
+                )
+            )
     )
-);
 }

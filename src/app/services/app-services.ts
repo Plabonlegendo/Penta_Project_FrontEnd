@@ -19,4 +19,8 @@ export class AppService {
     registerPerson(registerObj: any): Observable<RequestResponse> {
         return this.http.post<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "auth/signup/person", registerObj);
     }
+
+    getPersonListForAdmin():Observable<RequestResponse> {
+        return this.http.get<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "resources/admin");
+    }
 }

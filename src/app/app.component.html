@@ -1,6 +1,6 @@
-<mat-toolbar color="primary" class="app-header">
+<mat-toolbar *ngIf="route.url =='/login' || route.url == '/register'" color="primary" class="app-header">
   <div class="col-md-8">
-    <a target="blank" class="positronx">Simple University Application</a>
+    <a target="blank" class="simpleToolbar">Simple University Application</a>
   </div>
   <span class="nav-tool-items">
     <a mat-button routerLink="login" routerLinkActive="active">Log in</a>
