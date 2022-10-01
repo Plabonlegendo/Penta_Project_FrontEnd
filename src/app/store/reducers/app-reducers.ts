@@ -18,6 +18,7 @@ export interface applicationState {
     isLoginDataLoading: boolean,
     isAdminPersonListLoading: boolean,
     AdminPersonList: PersonDto[],
+    isForgetPasswordSuccess: boolean,
 }
 
 export const initialApplicationState: applicationState = {
@@ -29,6 +30,7 @@ export const initialApplicationState: applicationState = {
     isLoginDataLoading: false,
     isAdminPersonListLoading: false,
     AdminPersonList: [],
+    isForgetPasswordSuccess: false,
 }
 
 export const applicationReducer = createReducer(
@@ -99,5 +101,18 @@ export const applicationReducer = createReducer(
         isAdminPersonListLoading: false
     })),
 
+    //Forget Password
+    on(appActions.SaveForgetPasswordRequest, (state) => ({
+        ...state,
+        isForgetPasswordSuccess: false
+    })),
+    on(appActions.SaveForgetPasswordSuccess, (state, { requestResponse }) => ({
+        ...state,
+        isForgetPasswordSuccess: true,
+    })),
+    on(appActions.SaveForgetPasswordFailed, (state, { error }) => ({
+        ...state,
+        isForgetPasswordSuccess: false
+    }))
 
 )

@@ -1,4 +1,4 @@
-<mat-toolbar *ngIf="route.url =='/login' || route.url == '/register'" color="primary" class="app-header">
+<mat-toolbar *ngIf="isHeaderPermissible()" color="primary" class="app-header">
   <div class="col-md-8">
     <a target="blank" class="simpleToolbar">Simple University Application</a>
   </div>

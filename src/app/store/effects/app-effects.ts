@@ -43,5 +43,17 @@ export class appEffects {
                     )
                 )
             )
+    );
+
+    SaveForgetPassword$ = createEffect(() => 
+    this.actions$.pipe(
+        ofType(appActions.SaveForgetPasswordRequest),
+        exhaustMap(({ forgetPasswordObj }) =>
+            this.appService.saveForgetPassword(forgetPasswordObj).pipe(
+                map((requestResponse) => appActions.SaveForgetPasswordSuccess({ requestResponse })),
+                catchError((error) => of(appActions.SaveForgetPasswordFailed({ error })))
+            )
+        )
+    )
     )
 }

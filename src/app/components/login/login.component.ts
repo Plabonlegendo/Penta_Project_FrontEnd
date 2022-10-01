@@ -51,6 +51,7 @@ export class LoginComponent implements OnInit {
       }
     });
 
+
     this.store.select(getIsLoginSuccessful).subscribe(data => {
         if(data.isDataLoading == false){
           if(data.isLoginSuccessful == true){
@@ -62,6 +63,11 @@ export class LoginComponent implements OnInit {
         }
     })
 
+  }
+
+  
+  forget_password(){
+    this.router.navigate(["forget_password"]);      
   }
 
   goToDashboardPage(role: string){

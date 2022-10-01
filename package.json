@@ -27,6 +27,7 @@
     "@ngrx/effects": "^14.3.1",
     "@ngrx/store": "^14.3.1",
     "@rxweb/reactive-form-validators": "^2.1.7",
+    "angular-disable-browser-back-button": "^1.0.2",
     "bootstrap": "^5.2.1",
     "jwt-decode": "^3.1.2",
     "rxjs": "~7.5.0",

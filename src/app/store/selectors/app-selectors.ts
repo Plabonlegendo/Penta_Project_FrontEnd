@@ -30,3 +30,8 @@ export const getPersonListForAdmin = createSelector(
     selectAppState,
     (state) => state.AdminPersonList
 );
+
+export const getIsForgetPasswordSuccessful = createSelector(
+    selectAppState,
+    (state) => state.isForgetPasswordSuccess
+);

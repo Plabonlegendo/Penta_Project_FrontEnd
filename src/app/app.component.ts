@@ -8,10 +8,20 @@ import { ActivatedRoute, Router } from '@angular/router';
 })
 export class AppComponent {
   title = 'sample_project_frontend';
+
+  nonPermittedUrlsForHeader: any[] = ['resources_admin'];
   
   constructor(public route: Router){}
 
   ngOnInit(){
     
+  }
+
+  isHeaderPermissible(){
+    if(this.nonPermittedUrlsForHeader.includes(this.route.url)){
+      return false;
+    }else{
+      return true;
+    }
   }
 }

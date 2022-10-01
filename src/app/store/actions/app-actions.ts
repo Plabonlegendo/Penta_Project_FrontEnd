@@ -19,8 +19,8 @@ export const SaveForgetPasswordSuccess = createAction("SUA-SaveForgetPasswordSuc
 export const SaveForgetPasswordFailed = createAction("SUA-SaveForgetPasswordFailed", props<{ error: any }>());
 
 export const SaveProcessForgetPasswordRequest = createAction("SUA-SaveProcessForgetPasswordRequest", props<{ processPasswordObj: any }>());
-export const SaveProcessForgetPasswordSuccess = createAction("SUA-SaveForgetPasswordSuccess", props<{ requestResponse: RequestResponse }>());
-export const SaveProcessForgetPasswordFailed = createAction("SUA-SaveForgetPasswordFailed", props<{ error: any }>());
+export const SaveProcessForgetPasswordSuccess = createAction("SUA-SaveProcessForgetPasswordSuccess", props<{ requestResponse: RequestResponse }>());
+export const SaveProcessForgetPasswordFailed = createAction("SUA-SaveProcessForgetPasswordFailed", props<{ error: any }>());
 
 
 

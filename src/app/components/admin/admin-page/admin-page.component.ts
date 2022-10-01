@@ -49,7 +49,7 @@ export class AdminPageComponent implements OnInit {
   }
 
   logOut(){
-    localStorage.removeItem(BaseData.LocalStorageKey.User);
+    localStorage.removeItem(BaseData.LocalStorageKey.Auth);
     this.router.navigate(['/login']);
   }
 }

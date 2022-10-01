@@ -23,4 +23,8 @@ export class AppService {
     getPersonListForAdmin():Observable<RequestResponse> {
         return this.http.get<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "resources/admin");
     }
+
+    saveForgetPassword(forgetPasswordObj: any): Observable<RequestResponse> {
+        return this.http.post<RequestResponse>(ServiceGatewayUrl.ApiBaseUrl + "auth/forgot_password", forgetPasswordObj);
+    }
 }

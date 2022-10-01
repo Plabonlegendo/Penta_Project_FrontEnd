@@ -28,6 +28,10 @@ import { AdminPageComponent } from './components/admin/admin-page/admin-page.com
 import { AdminPersonsListComponent } from './components/admin/admin-persons-list/admin-persons-list.component';
 import { HttpRequestInterceptor } from './helpers/http-interceptor';
 
+import { BackButtonDisableModule } from 'angular-disable-browser-back-button';
+import { ForgetPasswordComponent } from './components/password-reset/forget-password/forget-password.component';
+import { ResetPasswordComponent } from './components/password-reset/reset-password/reset-password.component';
+
 
 
 @NgModule({
@@ -36,7 +40,9 @@ import { HttpRequestInterceptor } from './helpers/http-interceptor';
     LoginComponent,
     RegisterComponent,
     AdminPageComponent,
-    AdminPersonsListComponent
+    AdminPersonsListComponent,
+    ForgetPasswordComponent,
+    ResetPasswordComponent
   ],
   imports: [
     BrowserModule,
@@ -54,6 +60,9 @@ import { HttpRequestInterceptor } from './helpers/http-interceptor';
     EffectsModule.forFeature([
       appEffects
     ]),
+    BackButtonDisableModule.forRoot({
+      preserveScrollPosition: true
+    })
   ],
   providers: [],
   bootstrap: [AppComponent],
